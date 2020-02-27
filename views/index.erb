@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tareas</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+</head>
+<body >
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <h1 class="text-center" >LISTA DE TAREAS</h1>
+            <form class="col-md-6 col-md-offset-3" action="/" method="post">
+                <div class="form-group">
+                  <div class="row">
+                    <input type="text" id="tarea" name="verbo" class="form-control" placeholder="Ingresa la nueva tarea"/>
+                    <button type="submit"  class="btn-primary btn-block">Ingresar  Tarea</button> <br>
+                  </div>
+                </div>
+            </form>
+
+            <div class="container">
+              <table class="table table-hover table-condensed">
+                <thead>
+                  <tr>
+                    <th >Nombre</th>
+                    <th >Estado</th>
+                    <th ></th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <% @tareas.each do |tarea| %>
+                    <%if tarea["done"]==true %>
+                      <tr class="success">
+                        <td><%= tarea["title"] %></td>
+                        <td><span class="glyphicon glyphicon-ok"></span></td>
+                        <td>
+                            <a class="btn btn-default btn-xs" href="/eliminar/<%=tarea["id"]%>" role="button">Eliminar</a>
+                        </td>
+                      </tr>
+                    <%else %>
+                        <tr class="warning">
+                          <td><%= tarea["title"] %></td>
+                          <td>Incompleta</td>
+                          <td>
+                            <a class="btn btn-success btn-xs" href="/completar/<%=tarea["id"]%>" role="button">Completar</a>
+                            <a class="btn btn-default btn-xs" href="/eliminar/<%=tarea["id"]%>" role="button">Eliminar</a>
+                          </td>
+                        </tr>
+
+                    <% end %>
+                  <% end %>
+                </tbody>
+              </table>
+
+            </div>
+
+    </div>
+    </div>
+  </div>
